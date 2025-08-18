@@ -11,7 +11,7 @@ if exists('b:current_syntax')
 endif
 
 " Keywords
-syn keyword grenConditional else if of then case
+syn keyword grenConditional else if is then when
 syn keyword grenAlias alias
 syn keyword grenTypedef contained type port
 syn keyword grenImport exposing as import module where
