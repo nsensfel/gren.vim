@@ -68,13 +68,13 @@ syn match grenFuncName /^\l\w*/
 " Folding
 syn region grenTopLevelTypedef start="type" end="\n\(\n\n\)\@=" contains=ALL fold
 syn region grenTopLevelFunction start="^[a-zA-Z].\+\n[a-zA-Z].\+=" end="^\(\n\+\)\@=" contains=ALL fold
-syn region grenCaseBlock matchgroup=grenCaseBlockDefinition start="^\z\(\s\+\)\<case\>" end="^\z1\@!\W\@=" end="\(\n\n\z1\@!\)\@=" end="\n\z1\@!\(\n\n\)\@=" contains=ALL fold
-syn region grenCaseItemBlock start="^\z\(\s\+\).\+->$" end="^\z1\@!\W\@=" end="\(\n\n\z1\@!\)\@=" end="\(\n\z1\S\)\@=" contains=ALL fold
+syn region grenWhenBlock matchgroup=grenWhenBlockDefinition start="^\z\(\s\+\)\<when\>" end="^\z1\@!\W\@=" end="\(\n\n\z1\@!\)\@=" end="\n\z1\@!\(\n\n\)\@=" contains=ALL fold
+syn region grenWhenItemBlock start="^\z\(\s\+\).\+->$" end="^\z1\@!\W\@=" end="\(\n\n\z1\@!\)\@=" end="\(\n\z1\S\)\@=" contains=ALL fold
 syn region grenLetBlock matchgroup=grenLetBlockDefinition start="\<let\>" end="\<in\>" contains=ALL fold
 
 hi def link grenFuncName Function
-hi def link grenCaseBlockDefinition Conditional
-hi def link grenCaseBlockItemDefinition Conditional
+hi def link grenWhenBlockDefinition Conditional
+hi def link grenWhenBlockItemDefinition Conditional
 hi def link grenLetBlockDefinition TypeDef
 hi def link grenTopLevelDecl Function
 hi def link grenTupleFunction Normal
