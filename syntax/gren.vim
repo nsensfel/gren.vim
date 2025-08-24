@@ -13,7 +13,8 @@ endif
 " Keywords
 syn keyword grenConditional else if is then when
 syn keyword grenAlias alias
-syn keyword grenTypedef contained type port
+syn keyword grenTypedef contained type
+syn keyword grenPort contained port
 syn keyword grenImport exposing as import module where
 
 " Operators
@@ -30,7 +31,8 @@ syn keyword grenNumberType number
 
 " Modules
 syn match grenModule "\<\([A-Z][0-9A-Za-z_'-\.]*\)\+\.[A-Za-z]"me=e-2
-syn match grenModule "^\(module\|import\)\s\+[A-Z][0-9A-Za-z_'-\.]*\(\s\+as\s\+[A-Z][0-9A-Za-z_'-\.]*\)\?\(\s\+exposing\)\?" contains=grenImport
+"syn match grenModule "^\(port\|module\|import\)\s\+[A-Z][0-9A-Za-z_'-\.]*\(\s\+as\s\+[A-Z][0-9A-Za-z_'-\.]*\)\?\(\s\+exposing\)\?" contains=grenImport,grenPort
+syn match grenModuleB "^\s*port\s*module"
 
 " Delimiters
 syn match grenDelimiter  "[,;]"
@@ -62,8 +64,10 @@ syn match grenInt "-\?\<\d\+\>"
 syn match grenFloat "-\?\(\<\d\+\.\d\+\>\)"
 
 " Identifiers
-syn match grenTopLevelDecl "^\s*[a-zA-Z][a-zA-z0-9_]*\('\)*\s\+:\(\r\n\|\r\|\n\|\s\)\+" contains=grenOperator
-syn match grenFuncName /^\l\w*/
+syn match grenFuncName /^\l\w*/ contains=ALL,grenPort
+syn region grenTopLevelDecl start="^\s*\(port\s\+\)\?\l\w\+\s*:" end=":" contains=ALL fold
+"syn region grenTopLevelDecl start="^\s*\(port\s\+\)\?\(\l\w*\)\('\)*\s*:" end="\(\r\n\|\r\|\n\|\s\)" contains=grenOperator
+"syn region grenTopLevelDecl start="^\s*\(port\s\+\)\?\(\l\w*\)\('\)*\s*:" end="\(\r\n\|\r\|\n\|\s\)" contains=grenOperator
 
 " Folding
 syn region grenTopLevelTypedef start="type" end="\n\(\n\n\)\@=" contains=ALL fold
@@ -72,11 +76,11 @@ syn region grenWhenBlock matchgroup=grenWhenBlockDefinition start="^\z\(\s\+\)\<
 syn region grenWhenItemBlock start="^\z\(\s\+\).\+->$" end="^\z1\@!\W\@=" end="\(\n\n\z1\@!\)\@=" end="\(\n\z1\S\)\@=" contains=ALL fold
 syn region grenLetBlock matchgroup=grenLetBlockDefinition start="\<let\>" end="\<in\>" contains=ALL fold
 
-hi def link grenFuncName Function
 hi def link grenWhenBlockDefinition Conditional
 hi def link grenWhenBlockItemDefinition Conditional
 hi def link grenLetBlockDefinition TypeDef
 hi def link grenTopLevelDecl Function
+hi def link grenFuncName Function
 hi def link grenTupleFunction Normal
 hi def link grenTodo Todo
 hi def link grenComment Comment
@@ -99,6 +103,8 @@ hi def link grenNumberType Identifier
 hi def link grenLambdaFunc Function
 hi def link grenDebug Debug
 hi def link grenModule Type
+hi def link grenModuleB Include
+hi def link grenPort Include
 
 syn sync minlines=500
 
